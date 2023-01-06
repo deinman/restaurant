@@ -39,33 +39,33 @@ namespace Ploeh.Samples.Restaurants.RestApi
                     ActionContext.HttpContext.Request.Host.ToUriComponent());
                 url = new Uri(b.Uri, url).AbsoluteUri;
             }
-            var ub = new UriBuilder(url);
+            var ub = new UriBuilder(url!);
 
             using var hmac = new HMACSHA256(urlSigningKey);
             var sig = Convert.ToBase64String(
-                hmac.ComputeHash(Encoding.ASCII.GetBytes(url)));
+                hmac.ComputeHash(Encoding.ASCII.GetBytes(url!)));
 
             ub.Query = new QueryString(ub.Query).Add("sig", sig).ToString();
             return ub.ToString();
         }
 
-        public string Content(string contentPath)
+        public string Content(string? contentPath)
         {
-            return inner.Content(contentPath);
+            return inner.Content(contentPath)!;
         }
 
         [SuppressMessage(
             "Design",
             "CA1055:URI-like return values should not be strings",
             Justification = "Interface implementation. Can't change types.")]
-        public bool IsLocalUrl(string url)
+        public bool IsLocalUrl(string? url)
         {
             return inner.IsLocalUrl(url);
         }
 
-        public string Link(string routeName, object values)
+        public string Link(string? routeName, object? values)
         {
-            return inner.Link(routeName, values);
+            return inner.Link(routeName, values)!;
         }
 
         [SuppressMessage(
@@ -74,7 +74,7 @@ namespace Ploeh.Samples.Restaurants.RestApi
             Justification = "Interface implementation. Can't change types.")]
         public string RouteUrl(UrlRouteContext routeContext)
         {
-            return inner.RouteUrl(routeContext);
+            return inner.RouteUrl(routeContext)!;
         }
     }
 }

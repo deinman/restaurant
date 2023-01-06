@@ -112,7 +112,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var calendar = Assert.IsAssignableFrom<CalendarDto>(ok.Value);
             var day = Assert.Single(calendar.Days);
             Assert.Contains(
-                day.Entries.SelectMany(e => e.Reservations), 
+                day.Entries!.SelectMany(e => e.Reservations!), 
                 rdto => rdto.Id == r.Id.ToString("N"));
         }
 

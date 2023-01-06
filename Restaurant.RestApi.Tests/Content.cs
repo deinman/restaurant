@@ -20,7 +20,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
-            return dto;
+            return dto!;
         }
     }
 }

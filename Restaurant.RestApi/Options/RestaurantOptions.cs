@@ -34,7 +34,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Options
                 OpensAt,
                 LastSeating,
                 SeatingDuration,
-                Tables.Select(ts => ts.ToTable()));
+                Tables!.Select(ts => ts.ToTable()));
         }
     }
 }

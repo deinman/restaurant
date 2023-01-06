@@ -23,7 +23,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var homeRepresentation =
                 await homeResponse.ParseJsonContent<HomeDto>();
             var restaurant =
-                homeRepresentation.Restaurants.First(r => r.Name == name);
+                homeRepresentation.Restaurants!.First(r => r.Name == name);
             var address = restaurant.Links.FindAddress("urn:restaurant");
 
             return await client.GetAsync(address);
@@ -36,7 +36,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
         {
             string json = JsonSerializer.Serialize(reservation);
             using var content = new StringContent(json);
-            content.Headers.ContentType.MediaType = "application/json";
+            content.Headers.ContentType!.MediaType = "application/json";
 
             var resp = await client.GetRestaurant(name);
             resp.EnsureSuccessStatusCode();
@@ -53,7 +53,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
         {
             string json = JsonSerializer.Serialize(reservation);
             using var content = new StringContent(json);
-            content.Headers.ContentType.MediaType = "application/json";
+            content.Headers.ContentType!.MediaType = "application/json";
             return await client.PutAsync(address, content);
         }
 
@@ -104,7 +104,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var dto = await resp.ParseJsonContent<CalendarDto>();
 
             var target = new DateTime(year, month, day).ToIso8601DateString();
-            var dayCalendar = dto.Days.Single(d => d.Date == target);
+            var dayCalendar = dto.Days!.Single(d => d.Date == target);
             var address = dayCalendar.Links.FindAddress("urn:day");
             return await client.GetAsync(address);
         }
@@ -121,7 +121,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var dto = await resp.ParseJsonContent<CalendarDto>();
 
             var target = new DateTime(year, month, day).ToIso8601DateString();
-            var dayCalendar = dto.Days.Single(d => d.Date == target);
+            var dayCalendar = dto.Days!.Single(d => d.Date == target);
             var address = dayCalendar.Links.FindAddress("urn:schedule");
             return await client.GetAsync(address);
         }

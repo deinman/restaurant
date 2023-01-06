@@ -52,9 +52,7 @@ namespace Ploeh.Samples.Restaurants.RestApi
                 {
                     opts.Filters.Add<LinksFilter>();
                     opts.Filters.Add(new UrlIntegrityFilter(urlSigningKey));
-                })
-                .AddJsonOptions(opts =>
-                    opts.JsonSerializerOptions.IgnoreNullValues = true);
+                });
 
             ConfigureUrlSigning(services, urlSigningKey);
             ConfigureAuthorization(services);
@@ -93,7 +91,7 @@ namespace Ploeh.Samples.Restaurants.RestApi
 
             services.AddHttpContextAccessor();
             services.AddTransient(sp => AccessControlList.FromUser(
-                sp.GetService<IHttpContextAccessor>().HttpContext.User));
+                sp.GetService<IHttpContextAccessor>()!.HttpContext!.User));
         }
 
         private TokenValidationParameters CreateTokenValidationParameters()
@@ -120,9 +118,9 @@ namespace Ploeh.Samples.Restaurants.RestApi
                     sp.GetService<ILogger<LoggingReservationsRepository>>();
                 var postOffice = sp.GetService<IPostOffice>();
                 return new EmailingReservationsRepository(
-                    postOffice,
+                    postOffice!,
                     new LoggingReservationsRepository(
-                        logger,
+                        logger!,
                         new SqlReservationsRepository(connStr)));
             });
         }
@@ -143,7 +141,7 @@ namespace Ploeh.Samples.Restaurants.RestApi
             services.AddSingleton<IClock>(sp =>
             {
                 var logger = sp.GetService<ILogger<LoggingClock>>();
-                return new LoggingClock(logger, new SystemClock());
+                return new LoggingClock(logger!, new SystemClock());
             });
         }
 
@@ -156,8 +154,8 @@ namespace Ploeh.Samples.Restaurants.RestApi
                 var logger = sp.GetService<ILogger<LoggingPostOffice>>();
                 var db = sp.GetService<IRestaurantDatabase>();
                 return new LoggingPostOffice(
-                    logger,
-                    smtpOptions.ToPostOffice(db));
+                    logger!,
+                    smtpOptions.ToPostOffice(db!));
             });
         }
     }

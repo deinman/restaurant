@@ -47,7 +47,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
                 "urn:day"
             });
             var actual = await response.ParseJsonContent<RestaurantDto>();
-            var actualRels = actual.Links.Select(l => l.Rel).ToHashSet();
+            var actualRels = actual.Links!.Select(l => l.Rel).ToHashSet();
             Assert.Superset(expected, actualRels);
             Assert.All(actual.Links, AssertHrefAbsoluteUrl);
         }

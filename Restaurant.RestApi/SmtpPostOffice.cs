@@ -59,11 +59,12 @@ namespace Ploeh.Samples.Restaurants.RestApi
             sb.Append("Thank you for your reservation. ");
             sb.AppendLine("Here's the details about your reservation:");
             sb.AppendLine();
+#pragma warning disable CA1305
             sb.AppendLine($"At: {reservation.At}.");
             sb.AppendLine($"Party size: {reservation.Quantity}.");
             sb.AppendLine($"Name: {reservation.Name}.");
             sb.AppendLine($"Email: {reservation.Email}.");
-
+#pragma warning restore CA1305
             return sb.ToString();
         }
         public async Task EmailReservationDeleted(
@@ -91,11 +92,12 @@ namespace Ploeh.Samples.Restaurants.RestApi
             sb.Append("Your reservation was cancelled. ");
             sb.AppendLine("Here's the details about your reservation:");
             sb.AppendLine();
+#pragma warning disable CA1305
             sb.AppendLine($"At: {reservation.At}.");
             sb.AppendLine($"Party size: {reservation.Quantity}.");
             sb.AppendLine($"Name: {reservation.Name}.");
             sb.AppendLine($"Email: {reservation.Email}.");
-
+#pragma warning restore CA1305
             return sb.ToString();
         }
 
@@ -124,11 +126,12 @@ namespace Ploeh.Samples.Restaurants.RestApi
             sb.Append("Your reservation is changing. ");
             sb.AppendLine("Here's the details about your reservation:");
             sb.AppendLine();
+#pragma warning disable CA1305
             sb.AppendLine($"At: {reservation.At}.");
             sb.AppendLine($"Party size: {reservation.Quantity}.");
             sb.AppendLine($"Name: {reservation.Name}.");
             sb.AppendLine($"Email: {reservation.Email}.");
-
+#pragma warning restore CA1305
             return sb.ToString();
         }
 
@@ -157,11 +160,12 @@ namespace Ploeh.Samples.Restaurants.RestApi
             sb.Append("Your reservation changed. ");
             sb.AppendLine("Here's the details about your reservation:");
             sb.AppendLine();
+#pragma warning disable CA1305
             sb.AppendLine($"At: {reservation.At}.");
             sb.AppendLine($"Party size: {reservation.Quantity}.");
             sb.AppendLine($"Name: {reservation.Name}.");
             sb.AppendLine($"Email: {reservation.Email}.");
-
+#pragma warning restore CA1305
             return sb.ToString();
         }
 

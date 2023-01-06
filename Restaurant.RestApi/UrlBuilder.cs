@@ -60,7 +60,7 @@ namespace Ploeh.Samples.Restaurants.RestApi
                 values,
                 url.ActionContext.HttpContext.Request.Scheme,
                 url.ActionContext.HttpContext.Request.Host.ToUriComponent());
-            return new Uri(actionUrl);
+            return new Uri(actionUrl!);
         }
 
         public override bool Equals(object? obj)

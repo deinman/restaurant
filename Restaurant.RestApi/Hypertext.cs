@@ -170,7 +170,7 @@ namespace Ploeh.Samples.Restaurants.RestApi
             this IEnumerable<LinkDto>? links,
             string rel)
         {
-            var address = links.Single(l => l.Rel == rel).Href;
+            var address = links!.Single(l => l.Rel == rel).Href;
             if (address is null)
                 throw new InvalidOperationException(
                     $"Address for relationship type \"{rel}\" not found.");

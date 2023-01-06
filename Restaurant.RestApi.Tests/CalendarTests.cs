@@ -275,7 +275,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
 
         private static void AssertDayLinks(DayDto[]? days, string rel)
         {
-            var links = days.SelectMany(d => d.Links.Where(l => l.Rel == rel));
+            var links = days!.SelectMany(d => d.Links!.Where(l => l.Rel == rel));
             Assert.Equal(days?.Length, links.Count());
             Assert.All(links, AssertHrefAbsoluteUrl);
         }
@@ -384,7 +384,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             Assert.Equal(expectedDays, dto.Days?.Length);
             Assert.Equal(
                 expectedDays,
-                dto.Days.Select(d => d.Date).Distinct().Count());
+                dto.Days!.Select(d => d.Date).Distinct().Count());
         }
 
         private static void AssertEntries(
@@ -394,7 +394,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             CalendarDto dto)
         {
             var timeSlotEntries =
-                dto.Days.SelectMany(d => d.Entries ?? Array.Empty<TimeDto>());
+                dto.Days!.SelectMany(d => d.Entries ?? Array.Empty<TimeDto>());
             Assert.True(
                 expectedDays <= (timeSlotEntries?.Count() ?? 0),
                 $"Expected at least one time slot entry per day. Expected: {expectedDays}; actual: {timeSlotEntries?.Count() ?? 0}.");
@@ -412,7 +412,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
 
         private static void AssertContainsTime(string time, DayDto d)
         {
-            Assert.Contains(time, d.Entries.Select(e => e.Time));
+            Assert.Contains(time, d.Entries!.Select(e => e.Time));
         }
 
         [Theory]
@@ -482,7 +482,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var ok = Assert.IsAssignableFrom<OkObjectResult>(actual);
             var dto = Assert.IsAssignableFrom<CalendarDto>(ok.Value);
             var day =
-                Assert.Single(dto.Days.Where(d => d.Date == "2020-08-22"));
+                Assert.Single(dto.Days!.Where(d => d.Date == "2020-08-22"));
             var expected = new[]
             {
                 new TimeDto { Time = "20:00:00", MaximumPartySize =  9, },
@@ -524,7 +524,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var ok = Assert.IsAssignableFrom<OkObjectResult>(actual);
             var dto = Assert.IsAssignableFrom<CalendarDto>(ok.Value);
             var day =
-                Assert.Single(dto.Days.Where(d => d.Date == "2020-09-23"));
+                Assert.Single(dto.Days!.Where(d => d.Date == "2020-09-23"));
             var expected = new[]
             {
                 new TimeDto { Time = "18:30:00", MaximumPartySize = 4, },
@@ -567,7 +567,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
             var ok = Assert.IsAssignableFrom<OkObjectResult>(actual);
             var dto = Assert.IsAssignableFrom<CalendarDto>(ok.Value);
             var day = Assert.Single(dto.Days);
-            Assert.Equal(opensAt, day.Entries.First().Time);
+            Assert.Equal(opensAt, day.Entries!.First().Time);
         }
 
         [Fact]

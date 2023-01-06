@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Nullable>enable</Nullable>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Ploeh.Samples.Restaurants.RestApi</AssemblyName>
     <RootNamespace>Ploeh.Samples.Restaurants.RestApi</RootNamespace>
   </PropertyGroup>

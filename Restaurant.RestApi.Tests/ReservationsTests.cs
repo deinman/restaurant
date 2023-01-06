@@ -198,7 +198,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
 
         private static Uri FindReservationAddress(HttpResponseMessage response)
         {
-            return response.Headers.Location;
+            return response.Headers.Location!;
         }
 
         [Theory]
@@ -509,7 +509,7 @@ namespace Ploeh.Samples.Restaurants.RestApi.Tests
                 await client.GetDay(name, date.Year, date.Month, date.Day);
             var day = await response.ParseJsonContent<CalendarDto>();
             Assert.All(
-                day.Days.Single().Entries,
+                day.Days!.Single().Entries,
                 e => Assert.Equal(expected, e.MaximumPartySize));
         }
 
